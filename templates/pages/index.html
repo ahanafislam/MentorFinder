@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contant %}
+{% include 'partials/_alerts.html' %}
+    <!-- Search Bar-->
+    <div class="text-white mb-3 search_bar">
+        <section id="showcase">
+            <div class="container text-center">
+              <div class="home-search p-5">
+                <div class="overlay p-5">
+                  <h1 class="display-4 mb-4">
+                    Mentor Finding Just Get So Easy
+                  </h1>
+                  <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas, asperiores eveniet vel nostrum magnam
+                    voluptatum tempore! Consectetur, id commodi!</p>
+                  <div class="search">
+                    <form action="{% url 'search' %}">
+                      <!-- Form Row 1 -->
+                      <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                          <label class="sr-only">Keywords</label>
+                          <input type="text" name="keywords" class="form-control" placeholder="Search Mentor By Keywords">
+                        </div>
+        
+                        <div class="col-md-6 mb-3">
+                          <label class="sr-only">Mentor Name</label>
+                          <input type="text" name="name" class="form-control" placeholder="Search By Mentor Name">
+                        </div>
+                      </div>
+                      <!-- Form Row 2 -->
+                      <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                          <label class="sr-only">Category</label>
+                          <select name="category" class="form-control">
+                            <option selected="true" disabled="disabled">Category (All)</option>
+                            {% for key,value in category.items %}
+                              <option value="{{ key }}">{{ value }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                          <label class="sr-only">District</label>
+                          <select name="district" class="form-control">
+                            <option selected="true" disabled="disabled">District (All)</option>
+                            {% for key,value in district_list.items %}
+                              <option value="{{ key }}">{{ value }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                          <label class="sr-only">Divisions</label>
+                          <select name="division" class="form-control">
+                            <option selected="true" disabled="disabled">Divisions (All)</option>
+                            {% for key,value in divisions_list.items %}
+                              <option value="{{ key }}">{{ value }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <button class="btn btn-secondary btn-block mt-4" type="submit">Let's find!</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+      </div>
+      <!-- Listings -->
+    <section id="listings" class="py-5">
+        <div class="container">
+        <h3 class="text-center mb-3 h4text">New Mentors List <hr></h3>
+        <div class="row">
+          {% if mentors %}
+            {% for mentor in mentors %}
+              <div class="col-md-6 col-lg-4 mb-4">
+                  <div class="card">
+                    {% if mentor.cover_photo_1 %}
+                    <img class="card-img-top" width="330px" height="220px" src="{{ mentor.cover_photo_1.url  }}" alt="">
+                    {% else %}
+                    <img class="card-img-top" width="330px" height="220px" src="{% static 'img/default_cvp.jpg' %}"/>
+                    {% endif %}
+                  <div class="card-body">
+                      <div class="listing-heading text-center">
+                      <h5 class="h4text">{{ mentor.title }}</h5>
+                      <p>
+                        {% if mentor.mentors_picture %}
+                            <img class="rounded-circle mr-2" src="{{mentor.mentors_picture.url}}" width="25" height="25"/>
+                        {% else %}
+                          <img class="rounded-circle mr-2" src="{% static 'img/default_dp.jpg' %}" width="25" height="25"/>
+                        {% endif %} {{ mentor.mentor_Name }}</p>
+                      </div>
+                      
+                      <div class="row py-2 text-secondary">
+                      <p>{{ mentor.summary }}</p>
+                      </div>
+                      <a href="{% url 'mentors_details' mentor.id %}" class="btn btn-secondary btn-block stretched-link">More Info</a>
+                  </div>
+                  </div>
+              </div>
+          {% endfor %}
+          {% else%}
+          <div class="col-md-12">
+            <p>No Mentors Available</p>
+          </div>
+        {% endif %}
+        </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-5 nav_bg text-white">
+        <div class="container">
+          <div class="row text-center">
+            <div class="col-md-4">
+              <img src="{% static 'img/icon/chat.png' %}" alt="">
+              <hr>
+              <h3>Consulting Services</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+                hic dignissimos ratione ea quae.</p>
+            </div>
+            <div class="col-md-4">
+              <img src="{% static 'img/icon/work.png' %}" alt="">
+              <hr>
+              <h3>How it's work?</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+                hic dignissimos ratione ea quae.</p>
+            </div>
+            <div class="col-md-4">
+              <img src="{% static 'img/icon/mentor.png' %}" alt="">
+              <hr>
+              <h3>Become a mentor</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+                hic dignissimos ratione ea quae.</p>
+            </div>
+          </div>
+        </div>
+    </section>
+
+{% endblock %}

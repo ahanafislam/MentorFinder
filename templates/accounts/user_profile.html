@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contant %}
+<!-- User home navbar -->
+<div class="container">
+    {% include 'partials/_alerts.html' %}
+<div class="row">
+    <div class="col-sm-3">
+        {% include 'partials/_userHNav.html' %}
+    </div>
+    <div class="col-sm-9">
+        <div class="modal-dialog mt-2">
+            <div class="modal-content">
+                <div class="modal-header nav_bg text-white">
+                    <h5 class="modal-title" id="inquiryModalLabel">
+                        <i class="far fa-address-card"></i> Profile</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="card" style="max-width: 540px;">
+                            {% if request.user.profile_picture %}
+                                <img class="rounded-circle m-auto"
+                                    src="{{user.profile_picture.url}}" width="180" height="180"/>
+                            {% else %}
+                            <img class="rounded-circle m-auto"
+                                src="{% static 'img/default_dp.jpg' %}" width="180" height="180"/>
+                            {% endif %}
+                            <div class="card-body m-auto">
+                              <h4 class="card-title ml-4">{{ request.user.first_name }} {{ request.user.last_name }}</h4>
+                            </div>
+                    </div>
+                    <hr>
+                    <!-- Alerts -->
+                    <form action="{% url 'user_profile' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        {{ form.first_name }}
+                        {{form.errors.first_name}}
+                        </div>
+                        <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        {{ form.last_name }}
+                        {{form.errors.last_name}}
+                        </div>
+                        <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="{% if form.errors.username %} form-control-error {% endif %}">{{ form.username }}</div>
+                        {{form.errors.username}}
+                        </div>
+                        <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="{% if form.errors.email %} form-control-error {% endif %}">{{ form.email }}</div>
+                        {{form.errors.email}}
+                        </div>
+                        <div class="form-group">
+                        <label for="phone">Phone</label>
+                        {{ form.phone_number }}
+                        {{form.errors.phone_number}}
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Profile Picture</label>
+                            {{ form.profile_picture }}
+                        </div>
+                        <input type="submit" value="Update" class="btn btn-secondary btn-block">
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contant %}

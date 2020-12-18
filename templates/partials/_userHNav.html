@@ -1,0 +1,60 @@
+{% load static %}
+<!-- This is for active batton -->
+{% url 'dashboard' as dashboard_url %}
+{% url 'mentorDashboard' as mentorDashboard_url %}
+{% url 'user_history' as user_history_url %}
+{% url 'user_history' as user_history_url %}
+{% url 'mentorHistory' as mentorHistory_url %}
+{% url 'user_profile' as user_profile_url %}
+
+<a href="
+        {% if request.user.is_staff %}
+            {% url 'empDashboard' %}
+        {% elif request.user.is_mentor %}
+            {% url 'mentorDashboard' %}
+        {% else %}
+            {% url 'dashboard' %}
+        {% endif %}
+        ">
+    <div class="card {% if request.path == dashboard_url or request.path == mentorDashboard_url %}
+                        activeBTN
+                    {% else %}
+                        home_bg
+                    {%endif%} text-white mb-2 mt-2" style="max-width: 18rem; text-align: center;">
+        <div class="card-body">
+        <h4 class="card-title"><i class="fas fa-columns"></i> Dashboard</h4>
+        </div>
+    </div>
+</a>
+
+<a href="
+        {% if request.user.is_mentor %}
+            {% url 'mentorHistory' %}
+        {% else %}
+            {% url 'user_history' %}
+        {% endif %}
+        ">
+        <div class="card
+            {% if request.path == user_history_url or request.path == mentorHistory_url %}
+                activeBTN
+            {% else %}
+                home_bg
+            {%endif%} text-white mb-2 mt-2" style="max-width: 18rem; text-align: center;">
+        <div class="card-body">
+        <h4 class="card-title"><i class="fas fa-history"></i> History</h4>
+        </div>
+    </div>
+</a>
+
+<a href="{% url 'user_profile' %}">
+    <div class="card
+        {% if request.path == user_profile_url %}
+            activeBTN
+        {% else %}
+            home_bg
+        {%endif%} text-white mb-2 mt-2" style="max-width: 18rem; text-align: center;">
+        <div class="card-body">
+        <h4 class="card-title"><i class="far fa-address-card"></i> Profile</h4>
+        </div>
+    </div>
+</a>

@@ -1,0 +1,15 @@
+#header{
+    background-image: linear-gradient(to right,#90148e,#3b1174);
+}
+
+#branding h1{
+    color: #fff;
+}
+
+.module caption{
+    background-image: linear-gradient(to right,#90148e,#3b1174);
+}
+
+body{
+    background-image: linear-gradient(to right,#d1b2e0,#efbbff);
+}

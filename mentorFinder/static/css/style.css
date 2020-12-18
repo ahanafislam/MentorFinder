@@ -1,0 +1,72 @@
+.nav_bg{
+    background-image: linear-gradient(to right,#90148e,#3b1174);
+}
+
+.btn-secondary{
+    background-image: linear-gradient(to right,#90148e,#3b1174);
+    border: none;
+}
+
+.btn-secondary:hover{
+    background-image: linear-gradient(to left,#90148e,#3b1174);
+}
+
+.search_bar{
+    background: url(../img/sld11.jpg);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    border: none;
+}
+
+.h4text{
+    color: #90148e;
+}
+
+.dropdown-item{
+    color: seashell;
+}
+
+.dropdown-item:hover{
+    color: seashell;
+    background-image: linear-gradient(to left,#90148e,#3b1174);
+}
+
+.breadcrumb-item a{
+    color: #90148e;
+}
+
+.search_bar_color{
+    background-image: linear-gradient(to right,#d1b2e0,#efbbff);
+}
+
+.errorlist li {
+    color: red;
+    font-weight: bold;
+    font-size: smaller;
+}
+
+.errorlist{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.form-control-error .form-control{
+    border: 1px red solid;
+}
+
+.home_bg{
+    background: #90148e;
+}
+
+.home_bg:hover{
+    background-image: linear-gradient(to right,#90148e,#3b1174);
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.activeBTN{
+    background : #57127d;
+}

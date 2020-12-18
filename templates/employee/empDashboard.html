@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contant %}
+<!-- Employee home navbar -->
+<div class="container">
+    {% include 'partials/_alerts.html' %}
+<div class="row">
+    <div class="col-sm-3">
+        {% include 'partials/_userHNav.html' %}
+    </div>
+    <div class="col-sm-9">
+        <h1>Employee Dash</h1>    
+    </div>
+    </div>
+</div>
+{% endblock contant %}

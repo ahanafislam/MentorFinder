@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contant %}
+<!-- User home navbar -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+        {% include 'partials/_userHNav.html' %}
+        </div>
+        <div class="col-sm-9">
+            {% if appointment %}
+              <table class="table table-striped table-sm mt-2 search_bar_color">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Mentor Name</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Apply Date</th>
+                      <th scope="col">Appointment Date</th>
+                      <th scope="col">View Mentor</th>
+                      <th scope="col">Is Visited</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for appointment in appointment %}
+                      <tr>
+                          <th scope="row">{{ forloop.counter }}</th>
+                          <td>{{ appointment.mentor_Name }}</td>
+                          <td>{{ appointment.mentor_category }}</td>
+                          <td>{{ appointment.apply_date_pretty }}</td>
+                          {% if appointment.appointment_date %}
+                            <td>{{ appointment.appointment_date_pretty }}</td>
+                          {% else %}
+                            <td>Painding</td>
+                          {% endif %}
+                          <td><a class="btn btn-secondary btn-block" href="{% url 'mentors_details' appointment.mentor_id  %}">View</a></td>
+                          <td class="align-middle">
+                            {% if appointment.is_visited %}
+                              <td>Visited</td>
+                            {% else %}
+                              <td class="align-middle">
+                                <a class="text-danger" href="{% url 'visited' appointment.id %}"><i class="far fa-times-circle"></i></a>
+                              </td>
+                            {% endif %}
+                          </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              {% else %}
+                <p>You have not made any appointment</p>
+              {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock contant %}

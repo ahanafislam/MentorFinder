@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contant %}
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header nav_bg text-white">
+        <h5 class="modal-title" id="inquiryModalLabel">
+          <i class="fas fa-user-plus"></i> Sign Up</h5>
+      </div>
+      <div class="modal-body">
+        <!-- Alerts -->
+        <form action="{% url 'signup' %}" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+              <label for="first_name">First Name</label>
+              {{ form.first_name }}
+              {{form.errors.first_name}}
+            </div>
+            <div class="form-group">
+              <label for="last_name">Last Name</label>
+              {{ form.last_name }}
+              {{form.errors.last_name}}
+            </div>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <div class="{% if form.errors.username %} form-control-error {% endif %}">{{ form.username }}</div>
+              {{form.errors.username}}
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <div class="{% if form.errors.email %} form-control-error {% endif %}">{{ form.email }}</div>
+              {{form.errors.email}}
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              {{ form.phone_number }}
+              {{form.errors.phone_number}}
+            </div>
+            <div class="form-group">
+                <label for="phone">Profile Picture</label>
+                {{ form.profile_picture }}
+            </div>
+            <div class="form-group">
+              <label for="password1">Password</label>
+              <div class="{% if form.errors.password2 %} form-control-error {% endif %}">{{ form.password1 }}</div>
+            </div>
+            <div class="form-group">
+              <label for="password2">Confirm Password</label>
+              <div class="{% if form.errors.password2 %} form-control-error {% endif %}">{{ form.password2 }}</div>
+              {{form.errors.password2}}
+            </div>
+            <input type="submit" value="SignUp" class="btn btn-secondary btn-block">
+        </form>
+        <p class="mt-2 mb-auto">Already have an account ? <a href="{% url 'loginPage' %}">Login</a></p>
+      </div>
+    </div>
+  </div>
+{% endblock contant %}
