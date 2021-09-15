@@ -18,6 +18,7 @@ def appointment(request):
         phone = request.POST['phone']
         # message = request.POST['message']
         mentor_username = request.POST['mentorUsername']
+        video_streaming_id = f'{user_id}{mentor_id}'
 
         # Check if user has already mande an appointment
         user_id = request.user.id
@@ -27,7 +28,7 @@ def appointment(request):
             messages.error(request, 'You have already booked an appointment for this mentor')
             return redirect('/mentors/' + mentor_id)
 
-        appointment = Appointment(user_id = user_id, mentor_id = mentor_id, visiting_free = visiting_free, mentor_Name = mentor_Name, mentor_category = category, name = name, email = email, phone = phone, mentor_username = mentor_username)
+        appointment = Appointment(user_id = user_id, mentor_id = mentor_id, visiting_free = visiting_free, mentor_Name = mentor_Name, mentor_category = category, name = name, email = email, phone = phone, mentor_username = mentor_username, video_streaming_id = video_streaming_id)
         appointment.save()
 
         messages.success(request, 'Your request has been submitted, our mentor will get back to you soon.')

@@ -15,6 +15,7 @@ class Appointment(models.Model):
     visiting_free = models.FloatField(default=None, blank=True)
     done_job = models.BooleanField(default=False)
     is_visited = models.BooleanField(default=False)
+    video_streaming_id = models.CharField(max_length=255,blank=True, null=True)
     appointment_date = models.DateTimeField(max_length=200, default=None, blank=True, null=True)
     mentor_username = models.CharField(max_length=200, blank=True)
 

@@ -19,6 +19,7 @@
                   <th scope="col">Apply Date</th>
                   <th scope="col">Appointment Date</th>
                   <th scope="col">Profile</th>
+                  <th scope="col">Video Call</th>
                   <th scope="col">Is Done</th>
                 </tr>
               </thead>
@@ -44,11 +45,15 @@
                       {% endif %}
                       <!-- View Profile -->
                       <td><a href="{% url 'view_profile' appointment.user_id %}" class="btn btn-secondary" >View</a></td>
+                      <td class="text-center">
+                        <a target="_blank" href="{% url 'videocall:video' streem_id=appointment.video_streaming_id %}" class="btn btn-success btn-sm" title="Click For Video Call">
+                          <i class="fas fa-video"></i>
+                        </a>
                       <td class="align-middle">
                         {% if appointment.done_job %}
                           <td class="text-success"><i class="fas fa-check-circle"></i></td>
                         {% else %}
-                          <td class="align-middle">
+                          <td>
                             <a class="text-danger" href="{% url 'done' appointment.id %}"><i class="far fa-times-circle"></i></a>
                           </td>
                         {% endif %}
