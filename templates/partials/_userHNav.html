@@ -6,6 +6,7 @@
 {% url 'user_history' as user_history_url %}
 {% url 'mentorHistory' as mentorHistory_url %}
 {% url 'user_profile' as user_profile_url %}
+{% url 'mentor_info' as mentor_info_url %}
 
 <a href="
         {% if request.user.is_staff %}
@@ -58,3 +59,17 @@
         </div>
     </div>
 </a>
+{% if request.user.is_mentor %}
+    <a href="{% url 'mentor_info' %}">
+        <div class="card
+            {% if request.path == mentor_info_url %}
+                activeBTN
+            {% else %}
+                home_bg
+            {%endif%} text-white mb-2 mt-2" style="max-width: 18rem; text-align: center;">
+            <div class="card-body">
+            <h4 class="card-title"><i class="fab fa-elementor"></i> Mentor Info</h4>
+            </div>
+        </div>
+    </a>
+{% endif %}

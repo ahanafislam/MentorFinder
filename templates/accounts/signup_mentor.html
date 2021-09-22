@@ -5,11 +5,11 @@
     <div class="modal-content">
       <div class="modal-header nav_bg text-white">
         <h5 class="modal-title" id="inquiryModalLabel">
-          <i class="fas fa-user-plus"></i> Sign Up</h5>
+          <i class="fas fa-user-plus"></i> Sign Up (Mentor)</h5>
       </div>
       <div class="modal-body">
         <!-- Alerts -->
-        <form action="{% url 'signup' %}" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'signup_mentor' %}" method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               <div class="form-group">
               <label for="first_name">First Name</label>
@@ -40,6 +40,9 @@
                 <label for="phone">Profile Picture</label>
                 {{ form.profile_picture }}
             </div>
+            <!-- <div>
+              {{ form.is_mentor}}
+            </div> -->
             <div class="form-group">
               <label for="password1">Password</label>
               <div class="{% if form.errors.password2 %} form-control-error {% endif %}">{{ form.password1 }}</div>
@@ -51,12 +54,7 @@
             </div>
             <input type="submit" value="SignUp" class="btn btn-secondary btn-block">
         </form>
-        <div class="float-left">
-          <a href="{% url 'signup_mentor' %}" class="badge rounded-pill nav_bg mt-3 text-white">Become A Mentor</a>
-        </div>
-        <div class="float-right">
-          <p class="mt-2 mb-auto">Already have an account ? <a href="{% url 'loginPage' %}">Login</a></p>
-        </div>
+        <p class="mt-2 mb-auto">Already have an account ? <a href="{% url 'loginPage' %}">Login</a></p>
       </div>
     </div>
   </div>

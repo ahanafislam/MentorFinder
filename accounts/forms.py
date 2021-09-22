@@ -14,7 +14,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username','email', 'first_name', 'last_name', 'profile_picture', 'phone_number')
+        fields = ('username','email', 'first_name', 'last_name', 'profile_picture', 'phone_number', 'is_mentor')
     
         widgets = {
             'first_name': forms.TextInput(attrs={'class': "form-control"}),

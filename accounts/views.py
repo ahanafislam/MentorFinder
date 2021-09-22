@@ -29,6 +29,24 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'accounts/signup.html', {'form': form})
 
+def signup_mentor(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_mentor = True
+            user.save()
+            username = form.cleaned_data.get('username')
+
+            group = Group.objects.get(name='Mentor')
+            user.groups.add(group)
+
+            messages.success(request, f'Account created for {username}!')
+            return redirect('loginPage')
+    else:
+        form = UserCreationForm()
+    return render(request, 'accounts/signup_mentor.html', {'form': form})
+
 @unauthenticated_user
 def loginPage(request):
     if request.method == 'POST':

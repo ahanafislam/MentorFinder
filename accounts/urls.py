@@ -3,6 +3,7 @@ from accounts import views
 
 urlpatterns = [
     path('signup/', views.signup, name='signup'),
+    path('signup_mentor/', views.signup_mentor, name='signup_mentor'),
     path('login/', views.loginPage, name='loginPage'),
     path('logout/', views.logout_view, name='logout'),
     path("user_profile/", views.update_user_profile, name='user_profile'),

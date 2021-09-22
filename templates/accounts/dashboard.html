@@ -35,11 +35,15 @@
                             <td>Painding</td>
                           {% endif %}
                           <td><a class="btn btn-secondary btn-block" href="{% url 'mentors_details' appointment.mentor_id  %}">View</a></td>
-                          <td class="text-center">
-                            <a target="_blank" href="{% url 'videocall:video' streem_id=appointment.video_streaming_id %}" class="btn btn-success btn-sm" title="Click For Video Call">
-                              <i class="fas fa-video"></i>
-                            </a>
-                          </td>
+                            {% if appointment.appointment_date %}
+                              <td class="text-center">
+                                <a target="_blank" href="{% url 'videocall:video' streem_id=appointment.video_streaming_id %}" class="btn btn-success btn-sm" title="Click For Video Call">
+                                  <i class="fas fa-video"></i>
+                                </a>
+                              </td>
+                            {% else %}
+                              <td>Painding Option</td>
+                            {% endif %}
                             {% if appointment.is_visited %}
                               <td>Visited</td>
                             {% else %}

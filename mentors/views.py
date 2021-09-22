@@ -13,7 +13,7 @@ from django.contrib import messages
 User = get_user_model()
 
 def mentors_list(request):
-    mentors = Mentor.objects.order_by('-join_date')
+    mentors = Mentor.objects.order_by('-join_date').filter(is_published=True)
     
     paginator = Paginator(mentors,6)
     page = request.GET.get('page')
@@ -34,7 +34,7 @@ def mentors_details(request,mentor_id):
     return render(request,'mentors/mentors_details.html',context)
 
 def search(request):
-    queryset_list = Mentor.objects.order_by('-join_date')
+    queryset_list = Mentor.objects.order_by('-join_date').filter(is_published=True)
 
     #Search by keywords
     if 'keywords' in request.GET:
@@ -112,3 +112,40 @@ def appointmentDate(request, appointment_id):
         appointment.appointment_date = request.POST.get('appointment_date')
         appointment.save()
         return redirect('mentorDashboard')
+
+@login_required
+@allowed_users(['Mentor'])
+def mentor_info(request):
+    if request.method == 'POST':
+        mentor_Name = request.user
+        title = request.POST['title']
+        professional_degree = request.POST['professional_degree']
+        designation = request.POST['designation']
+        specialist_in = request.POST['specialist_in']
+        visiting_houre = request.POST['visiting_houre']
+        visiting_fees = request.POST['visiting_fees']
+        sex = request.POST['sex']
+        nid_no = request.POST['nid_no']
+        catagory = request.POST['catagory']
+        chamber_address = request.POST['chamber_address']
+        district = request.POST['district']
+        divisions = request.POST['divisions']
+        name = f'{request.user.first_name} {request.user.last_name}'
+        mentors_picture = request.FILES['mentors_picture']
+        cover_photo_1 = request.FILES['cover_photo_1']
+        cover_photo_2 = request.FILES['cover_photo_2']
+        cover_photo_3 = request.FILES['cover_photo_3']
+        descriptions = request.POST['descriptions']
+        is_published = False
+
+        mentor = Mentor(mentor_Name = mentor_Name,title = title,professional_degree = professional_degree,designation = designation,specialist_in = specialist_in,visiting_houre = visiting_houre,visiting_fees = visiting_fees,sex = sex,nid_no = nid_no,catagory = catagory,chamber_address = chamber_address,district = district,divisions = divisions,name = name,mentors_picture = mentors_picture,cover_photo_1 = cover_photo_1,cover_photo_2 = cover_photo_2,cover_photo_3 = cover_photo_3,descriptions=descriptions,is_published = is_published)
+        mentor.save()
+        messages.success(request, 'Your mentor request is successfully uploaded. Please wait for three days our team member will contact with you for Verification')
+        return redirect('mentorDashboard')
+    else:
+        context = {
+            'district_list' : district_list,
+            'divisions_list' : divisions_list,
+            'category' : category_list,
+        }
+        return render(request,'mentors/mentor_info.html',context)
