@@ -32,7 +32,7 @@
                           {% if appointment.appointment_date %}
                             <td>{{ appointment.appointment_date_pretty }}</td>
                           {% else %}
-                            <td>Painding</td>
+                            <td>Pending</td>
                           {% endif %}
                           <td><a class="btn btn-secondary btn-block" href="{% url 'mentors_details' appointment.mentor_id  %}">View</a></td>
                             {% if appointment.appointment_date %}
@@ -42,7 +42,7 @@
                                 </a>
                               </td>
                             {% else %}
-                              <td>Painding Option</td>
+                              <td>Pending Option</td>
                             {% endif %}
                             {% if appointment.is_visited %}
                               <td>Visited</td>
